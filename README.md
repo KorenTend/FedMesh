@@ -41,7 +41,9 @@ The core of the FedMesh system is the **ScaMoon** algorithm, a novel hybrid fede
 3.  Install the required dependencies (a `requirements.txt` file is provided):
 
     ```bash
-    pip install -r requirements.txt
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+    pip install scikit-learn numpy tqdm matplotlib
+    pip install seaborn
     ```
 
     Key dependencies include: `torch`, `numpy`, `scikit-learn`, `matplotlib`.
