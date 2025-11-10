@@ -1,4 +1,3 @@
-# models.py
 import torch.nn as nn
 
 class ConvBlock(nn.Module):
@@ -48,7 +47,7 @@ class GridNet(nn.Module):
         logits = x.view(x.size(0), -1)
         
         if not return_projection:
-            return logits # 只返回 logits，用于SCAFFOLD
+            return logits
         
         rep_flat = self.global_avg_pool(representation).view(representation.size(0), -1)
         projection = self.projector(rep_flat)
