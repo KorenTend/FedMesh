@@ -1,62 +1,75 @@
-# FedMesh: A Federated Learning Framework for Privacy-Preserving and Distributed Mesh Quality Evaluation
+<div align="center">
 
-[](https://www.sciencedirect.com/journal/knowledge-based-systems)
-[](https://opensource.org/licenses/MIT)
+<img src="figs/logo.png" width="120" alt="FedMesh Logo">
 
-This is the implementation for the paper **"FedMesh: A Federated Learning Framework for Privacy-Preserving and Distributed Mesh Quality Evaluation"**.
+# 🌌 FedMesh
+### A Federated Learning Framework for Privacy-Preserving Mesh Quality Evaluation
 
-FedMesh is a federated learning system specifically designed for **2D structured mesh quality assessment**. It aims to solve two core challenges in industrial practice:
+[![Journal](https://img.shields.io/badge/Journal-Knowledge--Based%20Systems-B31B1B.svg)](https://www.sciencedirect.com/journal/knowledge-based-systems)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Framework-PyTorch](https://img.shields.io/badge/Framework-PyTorch-EE4C2C.svg?logo=pytorch)](https://pytorch.org/)
+[![Topic-CFD](https://img.shields.io/badge/Domain-CFD%20%26%20Mesh-00599C.svg)](https://en.wikipedia.org/wiki/Computational_fluid_dynamics)
 
-1.  **Data Privacy:** Industrial mesh data contains sensitive intellectual property and cannot be centrally shared.
-2.  **Data Heterogeneity (Non-IID):** Mesh data held by different clients (e.g., different departments or projects) varies significantly in **size and topology** (i.e., feature distribution skew). This causes traditional federated learning algorithms (like FedAvg) to fail.
+---
 
-## Core Algorithm: ScaMoon
+![FedMesh Banner](figs/banner.png)
 
-The core of the FedMesh system is the **ScaMoon** algorithm, a novel hybrid federated learning strategy that innovatively combines two mechanisms to collaboratively address the Non-IID challenge:
+</div>
 
-1.  **Direction Calibration Phase:**
-      * **Objective:** To solve the "client drift" problem caused by data heterogeneity.
-      * **Method:** Inspired by `SCAFFOLD`, it introduces client-level and server-level control variates to correct the gradient direction during local training, ensuring local updates move toward the true global optimum.
-2.  **Feature Refinement Phase:**
-      * **Objective:** To solve the problem of models learning "biased" feature representations from one-sided data.
-      * **Method:** Inspired by `MOON`, it introduces a contrastive learning loss. By "pulling" the representations of the local and global models closer and "pushing" the representations of the local and previous-local models apart, ScaMoon forces the model to learn more robust defect features that are universal across different mesh sizes.
------
+**FedMesh** is a pioneering federated learning framework designed specifically for **2D structured mesh quality assessment** in Computational Fluid Dynamics (CFD). It enables several organizations to collaboratively train high-performance evaluation models without sharing sensitive geometric designs.
 
-## 🔧 Installation
+## 🚀 Key Features
 
-1.  Clone this repository:
+- **🛡️ Privacy-First:** Native federated learning architecture ensures zero raw data exchange.
+- **🛰️ ScaMoon Algorithm:** A novel hybrid strategy combining SCAlable Direction Correction and MOON-inspired representation alignment.
+- **📈 Robust to Non-IID:** Specifically engineered to handle extreme data heterogeneity (varying mesh scales and topologies).
+- **🎯 Superior Performance:** Outperforms SOTA FL baselines (FedAvg, Scaffold, MOON) and matches centralized training accuracy.
 
-    ```bash
-    git clone https://github.com/KorenTend/FedMesh.git
-    cd FedMesh
-    ```
+---
 
-2.  Create and activate a Conda environment:
+## 🧠 Core Methodology: ScaMoon
 
-    ```bash
-    conda create -n fedmesh python=3.9
-    conda activate fedmesh
-    ```
+The core of FedMesh is the **ScaMoon** algorithm, addressing scientific challenges including "client drift" and "representation bias" through two elegant phases:
 
-3.  Install the required dependencies (a `requirements.txt` file is provided):
+### 1. 🧭 Direction Correction Phase
+Inspired by **SCAFFOLD**, this phase uses momentum-based control variates and **Gradient Normalization** to stabilize the optimization trajectory, preventing the global model from being "pulled away" by large-scale mesh clients.
 
-    ```bash
-    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-    pip install scikit-learn numpy tqdm matplotlib
-    pip install seaborn
-    ```
+### 2. ✨ Feature Refinement Phase
+Leveraging **Multi-Scale Contrastive Learning**, this phase aligns features across low, mid, and high semantic layers. This forces the local encoder to learn invariant defect features that are robust to varying mesh connectivity and distortions.
 
-    Key dependencies include: `torch`, `numpy`, `scikit-learn`, `matplotlib`.
+---
 
------
+## 📊 Performance Benchmark
 
-## 🚀 Running Experiments
+| Method | Mean Accuracy | Mean Recall |
+| :--- | :---: | :---: |
+| FedAvg | 89.41% | 89.22% |
+| FedProx | 88.82% | 88.45% |
+| Scaffold | 90.35% | 90.00% |
+| MOON | 90.39% | 89.81% |
+| **FedMesh (Ours)** | **92.42%** | **92.33%** |
 
-Use the `main.py` script to start training. You can specify the federated learning strategy and hyperparameters via command-line arguments.
+---
 
-### Train ScaMoon (Default)
+## 🛠️ Installation
 
-Run the following command to train the complete ScaMoon algorithm:
+```bash
+# 1. Clone the repository
+git clone https://github.com/KorenTend/FedMesh.git
+cd FedMesh
+
+# 2. Setup environment
+conda create -n fedmesh python=3.9
+conda activate fedmesh
+
+# 3. Install dependencies
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install scikit-learn numpy tqdm matplotlib seaborn
+```
+
+## 🏃 Quick Start
+
+Run the training script with the ScaMoon strategy:
 
 ```bash
 python main.py \
@@ -66,3 +79,30 @@ python main.py \
     --learning_rate 2e-5 \
     --warmup_rounds 30
 ```
+
+---
+
+## 📜 Citation
+
+If you find this work helpful in your research, please consider citing our paper:
+
+```bibtex
+@article{li2025fedmesh,
+  title={FedMesh: A Novel Federated Learning Framework for Distributed Mesh Quality Evaluation},
+  author={Li, Ke and Zhang, Haoxuan and Li, Haisheng and Li, Nan},
+  journal={Knowledge-Based Systems},
+  year={2025},
+  publisher={Elsevier}
+}
+```
+
+---
+
+## 📧 Contact & Support
+
+Maintainer: [Koren Li](mailto:litind@163.com)  
+Research conducted at: **Beijing Technology and Business University** (BTBU) & **Beihang University** (BUAA).
+
+<div align="center">
+  <img src="figs/FedMesh.png" width="800" alt="System Architecture">
+</div>
