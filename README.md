@@ -5,7 +5,6 @@
 # 🌌 FedMesh
 ### A Federated Learning Framework for Privacy-Preserving Mesh Quality Evaluation
 
-[![Journal](https://img.shields.io/badge/Journal-Knowledge--Based%20Systems-B31B1B.svg)](https://www.sciencedirect.com/journal/knowledge-based-systems)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Framework-PyTorch](https://img.shields.io/badge/Framework-PyTorch-EE4C2C.svg?logo=pytorch)](https://pytorch.org/)
 [![Topic-CFD](https://img.shields.io/badge/Domain-CFD%20%26%20Mesh-00599C.svg)](https://en.wikipedia.org/wiki/Computational_fluid_dynamics)
