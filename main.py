@@ -88,24 +88,6 @@ def main(args):
             print(f"   client {cid}: data groups {client_group_map[cid]}, number of dataset: {len(local_dataset)}")
             clients.append(Client(cid, global_model, local_dataset, config))
 
-        if not clients:
-            print("\n    none client available, exiting...")
-            return
-            
-        print(f"\n strategy: {args.strategy}")
-        strategy = None
-        if args.strategy.lower() == 'fedavg': strategy = FedAvg(global_model)
-        elif args.strategy.lower() == 'moon': strategy = MOON(global_model, config)
-        elif args.strategy.lower() == 'fedprox': strategy = FedProx(global_model, config)
-        elif args.strategy.lower() == 'scaffold': strategy = SCAFFOLD(global_model, config)
-        elif args.strategy.lower() == 'scamoon': strategy = ScaMoon(global_model, config)
-        else: raise ValueError(f"unknown strategy: {args.strategy}")
-
-        server = Server(global_model, clients, strategy, val_loader, test_loader, config)
-        val_losses, val_accuracies, best_val_accuracy = server.run()
-
-        print("\n   testing the best model...")
-        best_model_state_dict = torch.load(config['model_save_path'], map_location=device, weights_only=True)
         load_model_state_dict(global_model, best_model_state_dict)
         
         _, test_acc, test_report = server.evaluate_global_model(test_loader)
