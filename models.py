@@ -21,8 +21,7 @@ class GridNet(nn.Module):
         self.features = nn.Sequential(
             ConvBlock(input_channels, 64), ConvBlock(64, 64), nn.MaxPool2d(2),
             ConvBlock(64, 128), ConvBlock(128, 128), nn.MaxPool2d(2),
-            ConvBlock(128, 256), ConvBlock(256, 256), ConvBlock(256, 256), nn.MaxPool2d(2),
-            ConvBlock(256, 512), ConvBlock(512, 512), ConvBlock(512, 512), nn.MaxPool2d(2),
+
             ConvBlock(512, 512), ConvBlock(512, 512), ConvBlock(512, 512),
         )
         self.global_avg_pool = nn.AdaptiveAvgPool2d((1, 1))
