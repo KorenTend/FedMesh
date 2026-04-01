@@ -25,11 +25,6 @@ class GridNet(nn.Module):
             ConvBlock(256, 512), ConvBlock(512, 512), ConvBlock(512, 512), nn.MaxPool2d(2),
             ConvBlock(512, 512), ConvBlock(512, 512), ConvBlock(512, 512),
         )
-        self.classifier = nn.Sequential(
-            nn.Conv2d(512, 4096, kernel_size=1), nn.ReLU(inplace=True), nn.Dropout2d(0.5),
-            nn.Conv2d(4096, 1024, kernel_size=1), nn.ReLU(inplace=True), nn.Dropout2d(0.5),
-            nn.Conv2d(1024, num_classes, kernel_size=1)
-        )
         self.global_avg_pool = nn.AdaptiveAvgPool2d((1, 1))
         
         feature_dim = 512
