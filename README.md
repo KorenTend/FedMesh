@@ -12,8 +12,6 @@
 
 ---
 
-![FedMesh Banner](figs/banner.png)
-
 </div>
 
 **FedMesh** is a pioneering federated learning framework designed specifically for **2D structured mesh quality assessment** in Computational Fluid Dynamics (CFD). It enables several organizations to collaboratively train high-performance evaluation models without sharing sensitive geometric designs.
@@ -38,19 +36,6 @@ Inspired by **SCAFFOLD**, this phase uses momentum-based control variates and **
 Leveraging **Multi-Scale Contrastive Learning**, this phase aligns features across low, mid, and high semantic layers. This forces the local encoder to learn invariant defect features that are robust to varying mesh connectivity and distortions.
 
 ---
-
-## 📊 Performance Benchmark
-
-| Method | Mean Accuracy | Mean Recall |
-| :--- | :---: | :---: |
-| FedAvg | 89.41% | 89.22% |
-| FedProx | 88.82% | 88.45% |
-| Scaffold | 90.35% | 90.00% |
-| MOON | 90.39% | 89.81% |
-| **FedMesh (Ours)** | **92.42%** | **92.33%** |
-
----
-
 ## 🛠️ Installation
 
 ```bash
@@ -81,28 +66,9 @@ python main.py \
 ```
 
 ---
-
-## 📜 Citation
-
-If you find this work helpful in your research, please consider citing our paper:
-
-```bibtex
-@article{li2025fedmesh,
-  title={FedMesh: A Novel Federated Learning Framework for Distributed Mesh Quality Evaluation},
-  author={Li, Ke and Zhang, Haoxuan and Li, Haisheng and Li, Nan},
-  journal={Knowledge-Based Systems},
-  year={2025},
-  publisher={Elsevier}
-}
-```
-
 ---
 
 ## 📧 Contact & Support
 
-Maintainer: [Koren Li](mailto:litind@163.com)  
-Research conducted at: **Beijing Technology and Business University** (BTBU) & **Beihang University** (BUAA).
-
-<div align="center">
-  <img src="figs/FedMesh.png" width="800" alt="System Architecture">
-</div>
+Maintainer: litind@163.com
+Research conducted at: **Beijing Technology and Business University** (BTBU)
