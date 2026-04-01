@@ -13,10 +13,7 @@ class MoonContrastiveLoss(nn.Module):
     def forward(self, rep_curr, rep_pos, rep_neg):
         rep_curr_flat = rep_curr.view(rep_curr.shape[0], -1)
         rep_pos_flat = rep_pos.view(rep_pos.shape[0], -1)
-        rep_neg_flat = rep_neg.view(rep_neg.shape[0], -1)
 
-        pos_sim = self.cosine_similarity(rep_curr_flat, rep_pos_flat) / self.temperature
-        neg_sim = self.cosine_similarity(rep_curr_flat, rep_neg_flat) / self.temperature
         
         logits = torch.stack([pos_sim, neg_sim], dim=1)
         loss = -pos_sim + torch.logsumexp(logits, dim=1)
@@ -35,20 +32,6 @@ class MOON(FedAvg):
 
         cid = client.client_id
         global_weights = get_model_state_dict(self.model)
-
-
-        global_model_copy = copy.deepcopy(self.model).to(self.device)
-        global_model_copy.eval()
-        load_model_state_dict(global_model_copy, global_weights)
-        
-        if cid not in self.previous_models:
-
-            self.previous_models[cid] = copy.deepcopy(global_model_copy)
-
-        previous_model_copy = self.previous_models[cid]
-        previous_model_copy.eval()
-
-        client.set_weights(global_weights)
         
         trained_weights = client.train(
             contrastive_criterion=self.contrastive_criterion,
