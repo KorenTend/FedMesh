@@ -70,4 +70,3 @@ python main.py \
 ## 📧 Contact & Support
 
 Maintainer: litind@163.com
-Research conducted at: **Beijing Technology and Business University** (BTBU)
