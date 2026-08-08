@@ -69,4 +69,4 @@ python main.py \
 
 ## 📧 Contact & Support
 
-Maintainer: litind@163.com
+Maintainer: 2431061070@st.btbu.edu.cn
